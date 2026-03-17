@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Nicolas & Phamyla — 31.10.2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   TOKENS & RESET
+   ============================================================ */
+:root {
+  --ink:    #0e1117;
+  --cream:  #f8f5f0;
+  --gold:   #b09060;
+  --gold-l: #d4b88a;
+  --stone:  #e8e3db;
+  --muted:  #7a7670;
+  --white:  #ffffff;
+
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans:  'Jost', sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16,1,0.3,1);
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--ink);
+  color: var(--cream);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+/* ============================================================
+   UTILITÁRIOS
+   ============================================================ */
+.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+
+/* ============================================================
+   SECTION: HERO — ENVELOPE ANIMATION
+   ============================================================ */
+#hero {
+  position: relative;
+  height: 300vh;
+}
+
+.hero-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* subtle noise texture overlay */
+.hero-sticky::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* thin gold lines decorative background */
+.hero-sticky::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, transparent 49.8%, rgba(176,144,96,0.06) 50%, transparent 50.2%),
+    linear-gradient(0deg,  transparent 49.8%, rgba(176,144,96,0.06) 50%, transparent 50.2%);
+  background-size: 80px 80px;
+  pointer-events: none;
+}
+
+/* ---- ENVELOPE WRAPPER ---- */
+.envelope-wrap {
+  position: relative;
+  width: 340px;
+  height: 240px;
+  z-index: 10;
+}
+
+@media (max-width: 400px) {
+  .envelope-wrap { width: 290px; height: 205px; }
+}
+
+/* ---- ENVELOPE BASE (back) ---- */
+.env-back {
+  position: absolute;
+  inset: 0;
+  background: var(--cream);
+  border-radius: 3px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* ---- ENVELOPE FRONT (lower diamond mask) ---- */
+.env-front {
+  position: absolute;
+  inset: 0;
+  background: #ede8e0;
+  border-radius: 3px;
+  clip-path: polygon(0 35%, 50% 72%, 100% 35%, 100% 100%, 0 100%);
+  z-index: 3;
+}
+
+/* centre seal */
+.env-front::after {
+  content: '✦';
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 13px;
+  color: var(--gold);
+  letter-spacing: 2px;
+}
+
+/* ---- ENVELOPE FLAP ---- */
+.env-flap {
+  position: absolute;
+  inset: 0;
+  background: #e2ddd5;
+  border-radius: 3px;
+  clip-path: polygon(0 0, 100% 0, 100% 2%, 50% 68%, 0 2%);
+  transform-origin: top center;
+  transform: rotateX(0deg);
+  z-index: 4;
+  will-change: transform;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.env-flap::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 68%;
+  background: linear-gradient(160deg, #d8d3ca 0%, #ccc7be 100%);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+/* wax seal on flap */
+.env-seal {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%) translateZ(1px);
+  width: 36px;
+  height: 36px;
+  background: radial-gradient(circle at 40% 35%, #c9a96e, #8c6830);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: rgba(255,255,255,0.85);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* ---- LETTER ---- */
+.letter {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%) translateY(0px);
+  width: 300px;
+  background: var(--white);
+  border-radius: 2px;
+  padding: 32px 28px 28px;
+  text-align: center;
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.15);
+  z-index: 2;
+  will-change: transform;
+  pointer-events: none;
+}
+
+@media (max-width: 400px) {
+  .letter { width: 258px; padding: 24px 20px 20px; }
+}
+
+.letter-ornament {
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 4px;
+  margin-bottom: 14px;
+  opacity: 0.7;
+}
+
+.letter-names {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--ink);
+  line-height: 1.1;
+  margin-bottom: 14px;
+}
+
+@media (max-width: 400px) {
+  .letter-names { font-size: 24px; }
+}
+
+.letter-amp {
+  font-style: italic;
+  color: var(--gold);
+  font-size: 32px;
+}
+
+.letter-verse {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 10px;
+  padding: 0 8px;
+}
+
+.letter-date {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 14px;
+}
+
+/* divider line */
+.letter-line {
+  width: 40px;
+  height: 1px;
+  background: var(--gold-l);
+  margin: 10px auto;
+  opacity: 0.5;
+}
+
+/* ---- SCROLL HINT ---- */
+.scroll-hint {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 1;
+  transition: opacity 0.4s;
+}
+
+.scroll-hint span {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.scroll-arrow {
+  width: 1px;
+  height: 32px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(1); }
+  50%       { opacity: 1;   transform: scaleY(1.1); }
+}
+
+/* ============================================================
+   SECTION: INTRO TEXT
+   ============================================================ */
+#intro {
+  background: var(--cream);
+  color: var(--ink);
+  padding: 100px 24px 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+#intro::before {
+  content: 'N & P';
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--serif);
+  font-size: 160px;
+  font-weight: 300;
+  color: rgba(14,17,23,0.04);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+
+.intro-tag {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+
+.intro-title {
+  font-family: var(--serif);
+  font-size: clamp(40px, 8vw, 72px);
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+
+.intro-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.intro-verse {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 420px;
+  margin: 0 auto 8px;
+  line-height: 1.7;
+}
+
+.intro-ref {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ============================================================
+   SECTION: COUNTDOWN
+   ============================================================ */
+#countdown {
+  background: var(--ink);
+  padding: 80px 24px;
+  text-align: center;
+  position: relative;
+}
+
+.section-tag {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  opacity: 0.8;
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 300;
+  margin-bottom: 48px;
+  color: var(--cream);
+}
+
+.section-title em { font-style: italic; color: var(--gold); }
+
+.countdown-grid {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cd-block {
+  flex: 1 1 100px;
+  max-width: 130px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(176,144,96,0.2);
+  border-radius: 3px;
+  padding: 24px 12px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cd-block::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.6;
+}
+
+.cd-num {
+  font-family: var(--serif);
+  font-size: 52px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--cream);
+  display: block;
+  min-width: 2ch;
+}
+
+.cd-label {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 8px;
+  display: block;
+}
+
+/* ============================================================
+   SECTION: DETAILS
+   ============================================================ */
+#details {
+  background: var(--cream);
+  color: var(--ink);
+  padding: 80px 24px;
+}
+
+.details-inner {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(14,17,23,0.1);
+  border: 1px solid rgba(14,17,23,0.1);
+  margin-top: 40px;
+}
+
+@media (max-width: 500px) {
+  .details-grid { grid-template-columns: 1fr; }
+}
+
+.detail-cell {
+  background: var(--cream);
+  padding: 36px 28px;
+  position: relative;
+}
+
+.detail-icon {
+  font-size: 20px;
+  margin-bottom: 12px;
+  display: block;
+  opacity: 0.6;
+}
+
+.detail-label {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.detail-value {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.detail-sub {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
+  letter-spacing: 1px;
+}
+
+/* ============================================================
+   SECTION: GALLERY
+   ============================================================ */
+#gallery {
+  background: var(--ink);
+  padding: 80px 0;
+}
+
+.gallery-header {
+  text-align: center;
+  padding: 0 24px 48px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 3px;
+}
+
+@media (max-width: 600px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.gallery-item {
+  aspect-ratio: 1;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(176,144,96,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.4s var(--ease-out-expo);
+}
+
+.gallery-item:hover { transform: scale(0.98); }
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-out-expo), filter 0.4s;
+  filter: grayscale(30%) brightness(0.9);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.04);
+  filter: grayscale(0%) brightness(1);
+}
+
+.gallery-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+}
+
+.gallery-placeholder span { font-size: 22px; opacity: 0.4; }
+.gallery-placeholder p { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.4; }
+
+/* lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.lightbox.active { opacity: 1; pointer-events: all; }
+
+.lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 2px;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 24px; right: 24px;
+  background: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+
+.lightbox-close:hover { background: rgba(255,255,255,0.1); }
+
+/* ============================================================
+   SECTION: MAP
+   ============================================================ */
+#map-section {
+  background: var(--cream);
+  color: var(--ink);
+  padding: 80px 24px;
+}
+
+.map-inner {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.map-frame {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border: none;
+  border-radius: 3px;
+  margin-top: 40px;
+  filter: grayscale(40%) contrast(1.05);
+  box-shadow: 0 20px 60px rgba(14,17,23,0.12);
+}
+
+.map-address {
+  margin-top: 24px;
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.map-cta {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 32px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.map-cta:hover { background: var(--gold); color: var(--white); }
+
+/* ============================================================
+   SECTION: RSVP
+   ============================================================ */
+#rsvp {
+  background: var(--ink);
+  padding: 80px 24px 100px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* large decorative text */
+#rsvp::before {
+  content: '31.10';
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--serif);
+  font-size: 200px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.02);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.rsvp-form {
+  max-width: 480px;
+  margin: 40px auto 0;
+  text-align: left;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 2px;
+  color: var(--cream);
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 300;
+  transition: border-color 0.3s, background 0.3s;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-select { cursor: pointer; }
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--gold);
+  background: rgba(255,255,255,0.06);
+}
+
+.form-textarea { resize: vertical; min-height: 80px; }
+
+.form-select option { background: var(--ink); color: var(--cream); }
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 480px) {
+  .form-row { grid-template-columns: 1fr; }
+}
+
+.rsvp-submit {
+  width: 100%;
+  padding: 16px;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+  margin-top: 8px;
+  transition: background 0.3s, color 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.rsvp-submit:hover {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+.rsvp-success {
+  display: none;
+  text-align: center;
+  padding: 32px;
+  border: 1px solid rgba(176,144,96,0.3);
+  border-radius: 3px;
+  margin-top: 40px;
+}
+
+.rsvp-success.visible { display: block; }
+
+.rsvp-success-icon { font-size: 32px; margin-bottom: 12px; }
+.rsvp-success h3 {
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--cream);
+  margin-bottom: 8px;
+}
+
+.rsvp-success p { font-size: 13px; color: var(--muted); }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  background: var(--ink);
+  border-top: 1px solid rgba(176,144,96,0.15);
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.footer-names {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.footer-date {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+#nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+#nav.hidden { opacity: 0; }
+
+.nav-inner {
+  display: flex;
+  gap: 28px;
+  background: rgba(14,17,23,0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(176,144,96,0.15);
+  border-radius: 40px;
+  padding: 10px 24px;
+  pointer-events: all;
+}
+
+.nav-link {
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-link:hover { color: var(--gold); }
+
+@media (max-width: 480px) {
+  .nav-inner { gap: 18px; padding: 9px 18px; }
+  .nav-link { font-size: 8px; letter-spacing: 2px; }
+}
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<nav id="nav" aria-label="Navegação principal">
+  <div class="nav-inner">
+    <a href="#intro"      class="nav-link">Início</a>
+    <a href="#countdown"  class="nav-link">Contagem</a>
+    <a href="#gallery"    class="nav-link">Galeria</a>
+    <a href="#map-section" class="nav-link">Local</a>
+    <a href="#rsvp"       class="nav-link">RSVP</a>
+  </div>
+</nav>
+
+<!-- ============================================================
+     HERO — ENVELOPE ANIMATION
+     ============================================================ -->
+<section id="hero" aria-label="Convite">
+  <div class="hero-sticky">
+
+    <!-- ENVELOPE + LETTER -->
+    <div class="envelope-wrap" id="envelopeWrap">
+
+      <!-- LETTER (behind envelope, rises up) -->
+      <div class="letter" id="letter" aria-hidden="true">
+        <p class="letter-ornament">✦ ✦ ✦</p>
+        <h1 class="letter-names">
+          Nicolas<br>
+          <span class="letter-amp">&</span><br>
+          Phamyla
+        </h1>
+        <div class="letter-line"></div>
+        <p class="letter-verse">"Assim, eles já não são dois, mas uma só carne."</p>
+        <p class="letter-verse" style="font-style:normal;font-family:var(--sans);font-size:10px;letter-spacing:2px;color:var(--gold);">Mateus 19:6</p>
+        <div class="letter-line"></div>
+        <p class="letter-date">31 · 10 · 2026</p>
+      </div>
+
+      <!-- ENVELOPE BACK -->
+      <div class="env-back" aria-hidden="true"></div>
+
+      <!-- ENVELOPE FRONT -->
+      <div class="env-front" aria-hidden="true"></div>
+
+      <!-- ENVELOPE FLAP -->
+      <div class="env-flap" id="envFlap" aria-hidden="true">
+        <div class="env-seal" aria-hidden="true">✦</div>
+      </div>
+
+    </div>
+    <!-- /envelope-wrap -->
+
+    <!-- SCROLL HINT -->
+    <div class="scroll-hint" id="scrollHint" aria-hidden="true">
+      <span>Role para abrir</span>
+      <div class="scroll-arrow"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     INTRO
+     ============================================================ -->
+<section id="intro">
+  <div class="reveal">
+    <p class="intro-tag">Você está convidado</p>
+  </div>
+  <div class="reveal reveal-delay-1">
+    <h2 class="intro-title">Nicolas <em>&</em> Phamyla</h2>
+  </div>
+  <div class="reveal reveal-delay-2">
+    <p class="intro-verse">"Assim, eles já não são dois, mas uma só carne. Portanto, o que Deus ajuntou, não o separe o homem."</p>
+    <p class="intro-ref" style="margin-top:12px;">Mateus 19:6</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     COUNTDOWN
+     ============================================================ -->
+<section id="countdown">
+  <div class="reveal">
+    <p class="section-tag">Faltam</p>
+    <h2 class="section-title">O Grande <em>Dia</em></h2>
+  </div>
+  <div class="countdown-grid reveal reveal-delay-1">
+    <div class="cd-block">
+      <span class="cd-num" id="cd-days">--</span>
+      <span class="cd-label">Dias</span>
+    </div>
+    <div class="cd-block">
+      <span class="cd-num" id="cd-hours">--</span>
+      <span class="cd-label">Horas</span>
+    </div>
+    <div class="cd-block">
+      <span class="cd-num" id="cd-minutes">--</span>
+      <span class="cd-label">Minutos</span>
+    </div>
+    <div class="cd-block">
+      <span class="cd-num" id="cd-seconds">--</span>
+      <span class="cd-label">Segundos</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DETAILS
+     ============================================================ -->
+<section id="details">
+  <div class="details-inner">
+    <div class="reveal">
+      <p class="section-tag" style="color:var(--gold);">Detalhes</p>
+      <h2 class="section-title" style="color:var(--ink);">Informações do <em style="color:var(--gold)">Evento</em></h2>
+    </div>
+    <div class="details-grid">
+      <div class="detail-cell reveal">
+        <span class="detail-icon">🗓</span>
+        <p class="detail-label">Data</p>
+        <p class="detail-value">31 de Outubro<br>de 2026</p>
+        <p class="detail-sub">Sábado</p>
+      </div>
+      <div class="detail-cell reveal reveal-delay-1">
+        <span class="detail-icon">⏰</span>
+        <p class="detail-label">Horário</p>
+        <p class="detail-value">17h00</p>
+        <p class="detail-sub">Cerimônia — 17h · Recepção — 19h</p>
+      </div>
+      <div class="detail-cell reveal reveal-delay-2">
+        <span class="detail-icon">📍</span>
+        <p class="detail-label">Local</p>
+        <p class="detail-value">Nome do Espaço</p>
+        <p class="detail-sub">Endereço, Cidade — Estado</p>
+      </div>
+      <div class="detail-cell reveal reveal-delay-3">
+        <span class="detail-icon">👔</span>
+        <p class="detail-label">Traje</p>
+        <p class="detail-value">Esporte Fino</p>
+        <p class="detail-sub">Cor a evitar: branco</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     GALLERY
+     ============================================================ -->
+<section id="gallery">
+  <div class="gallery-header">
+    <div class="reveal">
+      <p class="section-tag">Memórias</p>
+      <h2 class="section-title">Nossa <em>História</em></h2>
+    </div>
+  </div>
+  <div class="gallery-grid">
+    <!-- Substitua os placeholders pelas suas fotos -->
+    <!-- Exemplo: <img src="foto1.jpg" alt="Descrição"> -->
+    <div class="gallery-item reveal">
+      <div class="gallery-placeholder"><span>📷</span><p>Foto 1</p></div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-1">
+      <div class="gallery-placeholder"><span>📷</span><p>Foto 2</p></div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-2">
+      <div class="gallery-placeholder"><span>📷</span><p>Foto 3</p></div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-1">
+      <div class="gallery-placeholder"><span>📷</span><p>Foto 4</p></div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-2">
+      <div class="gallery-placeholder"><span>📷</span><p>Foto 5</p></div>
+    </div>
+    <div class="gallery-item reveal reveal-delay-3">
+      <div class="gallery-placeholder"><span>📷</span><p>Foto 6</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Foto ampliada">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Fechar">✕</button>
+  <img src="" alt="" id="lightboxImg">
+</div>
+
+<!-- ============================================================
+     MAP
+     ============================================================ -->
+<section id="map-section">
+  <div class="map-inner">
+    <div class="reveal">
+      <p class="section-tag" style="color:var(--gold);">Como Chegar</p>
+      <h2 class="section-title" style="color:var(--ink);">O <em style="color:var(--gold)">Local</em></h2>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <!--
+        INSTRUÇÕES: Substitua o src abaixo pelo embed do Google Maps do seu local.
+        No Google Maps: clique em "Compartilhar" → "Incorporar um mapa" → copie o <iframe src="...">
+      -->
+      <iframe
+        class="map-frame"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.1975492637556!2d-46.6520838!3d-23.5617152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDMzJzQyLjIiUyA0NsKwMzknMDcuNSJX!5e0!3m2!1spt-BR!2sbr!4v1600000000000!5m2!1spt-BR!2sbr"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Local do casamento"
+      ></iframe>
+      <p class="map-address">
+        Nome do Espaço<br>
+        Endereço completo, Cidade — Estado
+      </p>
+      <a
+        href="https://maps.google.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="map-cta"
+      >
+        Abrir no Maps
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     RSVP
+     ============================================================ -->
+<section id="rsvp">
+  <div class="reveal">
+    <p class="section-tag">Confirme sua Presença</p>
+    <h2 class="section-title">RSVP</h2>
+    <p style="font-size:12px;color:var(--muted);margin-top:-32px;margin-bottom:0;">
+      Confirme até <strong style="color:var(--gold)">01 de Outubro de 2026</strong>
+    </p>
+  </div>
+
+  <form class="rsvp-form reveal reveal-delay-1" id="rsvpForm" novalidate>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label" for="rsvp-name">Nome completo</label>
+        <input class="form-input" type="text" id="rsvp-name" name="name" placeholder="Seu nome" autocomplete="name" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="rsvp-email">E-mail</label>
+        <input class="form-input" type="email" id="rsvp-email" name="email" placeholder="seu@email.com" autocomplete="email" required>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label" for="rsvp-guests">Nº de acompanhantes</label>
+        <select class="form-select" id="rsvp-guests" name="guests">
+          <option value="0">Apenas eu</option>
+          <option value="1">+ 1 acompanhante</option>
+          <option value="2">+ 2 acompanhantes</option>
+          <option value="3">+ 3 acompanhantes</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="rsvp-confirm">Presença</label>
+        <select class="form-select" id="rsvp-confirm" name="confirm" required>
+          <option value="">Selecione</option>
+          <option value="yes">✓ Confirmo presença</option>
+          <option value="no">✗ Não poderei comparecer</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="rsvp-restrictions">Restrições alimentares (opcional)</label>
+      <textarea class="form-textarea" id="rsvp-restrictions" name="restrictions" placeholder="Ex: vegetariano, intolerância a lactose..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="rsvp-message">Deixe uma mensagem (opcional)</label>
+      <textarea class="form-textarea" id="rsvp-message" name="message" placeholder="Uma palavra carinhosa para os noivos..."></textarea>
+    </div>
+
+    <button type="submit" class="rsvp-submit">Confirmar Presença</button>
+
+  </form>
+
+  <div class="rsvp-success" id="rsvpSuccess" role="alert">
+    <div class="rsvp-success-icon">✦</div>
+    <h3>Obrigado!</h3>
+    <p>Sua presença foi confirmada.<br>Mal podemos esperar para celebrar com você!</p>
+  </div>
+
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <p class="footer-names">Nicolas & Phamyla</p>
+  <p class="footer-date">31 · 10 · 2026</p>
+</footer>
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+/* ----------------------------------------
+   1. REAL VIEWPORT HEIGHT (mobile fix)
+   ---------------------------------------- */
+function setVH() {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+setVH();
+window.addEventListener('resize', setVH);
+
+/* ----------------------------------------
+   2. ENVELOPE SCROLL ANIMATION
+   ---------------------------------------- */
+const hero     = document.getElementById('hero');
+const envFlap  = document.getElementById('envFlap');
+const letter   = document.getElementById('letter');
+const scrollHint = document.getElementById('scrollHint');
+
+function onScroll() {
+  const scrolled      = window.scrollY;
+  const heroHeight    = hero.offsetHeight - window.innerHeight;
+  const progress      = Math.min(Math.max(scrolled / heroHeight, 0), 1);
+
+  /* -- FLAP: opens from 0% → 50% scroll -- */
+  const flapP = Math.min(progress / 0.5, 1);
+  const flapAngle = flapP * -185;
+  envFlap.style.transform = `rotateX(${flapAngle}deg)`;
+  envFlap.style.zIndex    = flapAngle < -90 ? '0' : '4';
+
+  /* -- LETTER: rises from 40% → 100% scroll -- */
+  const letterP = Math.max((progress - 0.4) / 0.6, 0);
+  /* translateY: starts at 0 (inside envelope), rises to -320px above envelope */
+  const ty = -(letterP * 320);
+  letter.style.transform = `translateX(-50%) translateY(${ty}px)`;
+
+  /* hide scroll hint once scrolled */
+  scrollHint.style.opacity = progress > 0.05 ? '0' : '1';
+}
+
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll(); // init
+
+/* ----------------------------------------
+   3. COUNTDOWN
+   ---------------------------------------- */
+const WEDDING_DATE = new Date('2026-10-31T17:00:00');
+
+function updateCountdown() {
+  const now  = new Date();
+  const diff = WEDDING_DATE - now;
+
+  if (diff <= 0) {
+    document.getElementById('cd-days').textContent    = '00';
+    document.getElementById('cd-hours').textContent   = '00';
+    document.getElementById('cd-minutes').textContent = '00';
+    document.getElementById('cd-seconds').textContent = '00';
+    return;
+  }
+
+  const days    = Math.floor(diff / 86400000);
+  const hours   = Math.floor((diff % 86400000) / 3600000);
+  const minutes = Math.floor((diff % 3600000)  / 60000);
+  const seconds = Math.floor((diff % 60000)    / 1000);
+
+  const pad = n => String(n).padStart(2, '0');
+
+  document.getElementById('cd-days').textContent    = pad(days);
+  document.getElementById('cd-hours').textContent   = pad(hours);
+  document.getElementById('cd-minutes').textContent = pad(minutes);
+  document.getElementById('cd-seconds').textContent = pad(seconds);
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+/* ----------------------------------------
+   4. SCROLL REVEAL
+   ---------------------------------------- */
+const revealEls = document.querySelectorAll('.reveal');
+
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+revealEls.forEach(el => revealObserver.observe(el));
+
+/* ----------------------------------------
+   5. GALLERY LIGHTBOX
+   ---------------------------------------- */
+const lightbox      = document.getElementById('lightbox');
+const lightboxImg   = document.getElementById('lightboxImg');
+const lightboxClose = document.getElementById('lightboxClose');
+
+document.querySelectorAll('.gallery-item img').forEach(img => {
+  img.addEventListener('click', () => {
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+function closeLightbox() {
+  lightbox.classList.remove('active');
+  document.body.style.overflow = '';
+  lightboxImg.src = '';
+}
+
+lightboxClose.addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+/* ----------------------------------------
+   6. NAV: hide during hero, show after
+   ---------------------------------------- */
+const navEl = document.getElementById('nav');
+
+const heroObserver = new IntersectionObserver((entries) => {
+  navEl.classList.toggle('hidden', entries[0].isIntersecting);
+}, { threshold: 0.05 });
+
+heroObserver.observe(hero);
+
+/* ----------------------------------------
+   7. RSVP FORM
+   ---------------------------------------- */
+const rsvpForm    = document.getElementById('rsvpForm');
+const rsvpSuccess = document.getElementById('rsvpSuccess');
+
+rsvpForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const name    = document.getElementById('rsvp-name').value.trim();
+  const email   = document.getElementById('rsvp-email').value.trim();
+  const confirm = document.getElementById('rsvp-confirm').value;
+
+  if (!name || !email || !confirm) {
+    /* simple shake on empty required fields */
+    [document.getElementById('rsvp-name'),
+     document.getElementById('rsvp-email'),
+     document.getElementById('rsvp-confirm')].forEach(el => {
+       if (!el.value.trim()) {
+         el.style.borderColor = '#c0392b';
+         el.focus();
+       }
+     });
+    return;
+  }
+
+  /* 
+    INTEGRAÇÃO: Aqui você pode enviar os dados para um backend,
+    Firebase, Formspree, etc.
+    Exemplo com Formspree:
+    
+    const data = new FormData(rsvpForm);
+    fetch('https://formspree.io/f/SEU_ID', { method:'POST', body: data });
+  */
+
+  rsvpForm.style.display = 'none';
+  rsvpSuccess.classList.add('visible');
+});
+</script>
+
+</body>
+</html>
