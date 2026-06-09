@@ -100,6 +100,35 @@
       padding: 34px 18px 24px;
     }
 
+    .top-actions {
+      display: flex;
+      justify-content: flex-end;
+      padding-bottom: 8px;
+    }
+
+    .invite-link {
+      display: inline-flex;
+      min-height: 38px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 15px;
+      border: 1px solid rgba(216, 180, 107, 0.32);
+      border-radius: 999px;
+      color: var(--gold-soft);
+      background: rgba(255, 248, 236, 0.03);
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .invite-link:hover,
+    .invite-link:focus-visible {
+      border-color: var(--gold);
+      background: rgba(216, 180, 107, 0.1);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
     .hero {
       min-height: 390px;
       display: grid;
@@ -163,6 +192,12 @@
       padding: 8px 0 24px;
     }
 
+    .toolbar-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 8px;
+    }
+
     .filters {
       display: flex;
       gap: 10px;
@@ -196,6 +231,25 @@
       color: #101827;
       background: linear-gradient(135deg, var(--gold-soft), var(--gold));
       font-weight: 500;
+    }
+
+    .refresh-button {
+      min-height: 38px;
+      padding: 0 16px;
+      border: 1px solid rgba(216, 180, 107, 0.34);
+      border-radius: 999px;
+      color: var(--gold-soft);
+      background: rgba(255, 248, 236, 0.03);
+      font-size: 0.9rem;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .refresh-button:hover,
+    .refresh-button:focus-visible {
+      border-color: var(--gold);
+      background: rgba(216, 180, 107, 0.1);
+      outline: none;
+      transform: translateY(-1px);
     }
 
     .state {
@@ -675,6 +729,10 @@
 </head>
 <body>
   <main class="page">
+    <div class="top-actions">
+      <a class="invite-link" id="inviteLink" href="https://SEU-LINK-DO-CONVITE-AQUI.vercel.app">Voltar ao convite</a>
+    </div>
+
     <header class="hero">
       <div class="hero-inner">
         <div class="couple-mark" aria-hidden="true">N&P</div>
@@ -687,6 +745,9 @@
 
     <section class="toolbar" aria-label="Filtros da lista de presentes">
       <div class="filters" id="filters"></div>
+      <div class="toolbar-actions">
+        <button class="refresh-button" type="button" id="refreshList">Atualizar lista</button>
+      </div>
     </section>
 
     <section class="state" id="state" hidden></section>
@@ -741,7 +802,7 @@
         <p class="success-text" id="successText"></p>
 
         <div class="modal-actions">
-          <a class="link-button" id="purchaseLink" href="#" target="_blank" rel="noopener" hidden>Comprar presente</a>
+          <a class="link-button" id="purchaseLink" href="#" target="_blank" rel="noopener noreferrer" hidden>Comprar presente</a>
           <button class="secondary-button" type="button" id="backToList">Voltar à lista</button>
         </div>
       </div>
@@ -749,13 +810,17 @@
   </div>
 
   <script>
+    const CONVITE_URL = "https://SEU-LINK-DO-CONVITE-AQUI.vercel.app";
+
     // Cole aqui a URL do Web App do Apps Script terminada em /exec.
-    const GIFTS_ENDPOINT = "COLE_AQUI_A_URL_DO_WEB_APP_DO_APPS_SCRIPT";
+    const GIFTS_ENDPOINT = "https://script.google.com/macros/s/AKfycbw1OakzhKEstcltDJZoSEda4CyLxZd1N5YzMvDfdx3OW2CJghSIGTsGsvX00iBwDXtK/exec";
 
     const FILTERS = ["Todos", "Cozinha", "Quarto", "Banheiro", "Decoração", "Eletro", "Outros"];
 
     const elements = {
+      inviteLink: document.getElementById("inviteLink"),
       filters: document.getElementById("filters"),
+      refreshList: document.getElementById("refreshList"),
       state: document.getElementById("state"),
       giftGrid: document.getElementById("giftGrid"),
       modal: document.getElementById("giftModal"),
@@ -784,6 +849,7 @@
     document.addEventListener("DOMContentLoaded", init);
 
     function init() {
+      elements.inviteLink.href = CONVITE_URL;
       renderFilters();
       bindEvents();
       loadGifts();
@@ -796,6 +862,10 @@
         currentFilter = button.dataset.filter;
         renderFilters();
         renderGifts();
+      });
+
+      elements.refreshList.addEventListener("click", function () {
+        loadGifts();
       });
 
       elements.giftGrid.addEventListener("click", function (event) {
