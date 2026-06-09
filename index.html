@@ -339,6 +339,25 @@
       object-fit: cover;
     }
 
+    .gift-media-link {
+      display: block;
+      width: 100%;
+      height: 100%;
+      color: inherit;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .gift-media-link:hover img,
+    .gift-media-link:focus-visible img {
+      filter: brightness(1.06);
+    }
+
+    .gift-media-link:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: -2px;
+    }
+
     .gift-placeholder {
       display: grid;
       height: 100%;
@@ -427,6 +446,39 @@
     .gift-value {
       color: var(--gold-soft);
       font-weight: 400;
+    }
+
+    .product-link {
+      display: inline-flex;
+      min-height: 40px;
+      width: fit-content;
+      align-items: center;
+      justify-content: center;
+      padding: 0 15px;
+      border: 1px solid rgba(216, 180, 107, 0.34);
+      border-radius: 999px;
+      color: var(--gold-soft);
+      background: rgba(255, 248, 236, 0.03);
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .product-link:hover,
+    .product-link:focus-visible {
+      border-color: var(--gold);
+      background: rgba(216, 180, 107, 0.1);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    .gift-link-note {
+      margin: -2px 0 0;
+      padding-left: 11px;
+      border-left: 1px solid rgba(216, 180, 107, 0.36);
+      color: var(--muted-2);
+      font-size: 0.84rem;
+      line-height: 1.45;
     }
 
     .gift-action {
@@ -810,10 +862,10 @@
   </div>
 
   <script>
-    const CONVITE_URL = "https://teste-casamento-nine.vercel.app/";
+    const CONVITE_URL = "https://SEU-LINK-DO-CONVITE-AQUI.vercel.app";
 
     // Cole aqui a URL do Web App do Apps Script terminada em /exec.
-    const GIFTS_ENDPOINT = "https://script.google.com/macros/s/AKfycbw1OakzhKEstcltDJZoSEda4CyLxZd1N5YzMvDfdx3OW2CJghSIGTsGsvX00iBwDXtK/exec";
+    const GIFTS_ENDPOINT = "COLE_AQUI_A_URL_DO_WEB_APP_DO_APPS_SCRIPT";
 
     const FILTERS = ["Todos", "Cozinha", "Quarto", "Banheiro", "Decoração", "Eletro", "Outros"];
 
@@ -974,8 +1026,9 @@
 
     function renderGiftCard(gift) {
       const available = isGiftAvailable(gift);
+      const hasLink = Boolean(gift.link);
       const image = gift.image
-        ? '<img src="' + escapeAttribute(gift.image) + '" alt="' + escapeAttribute(gift.name) + '" loading="lazy">'
+        ? renderGiftImage(gift, hasLink)
         : '<div class="gift-placeholder"><span>N&amp;P</span></div>';
 
       return [
@@ -1001,6 +1054,8 @@
         "</h3>",
         gift.value ? '<p class="gift-value">' + escapeHtml(gift.value) + "</p>" : "",
         gift.note ? '<p class="gift-note">' + escapeHtml(gift.note) + "</p>" : "",
+        hasLink ? renderProductLink(gift) : "",
+        hasLink ? '<p class="gift-link-note">Antes de comprar, reserve o presente para evitar escolhas duplicadas.</p>' : "",
         '<button class="gift-action" type="button" data-choose-id="',
         escapeAttribute(gift.id),
         '"',
@@ -1010,6 +1065,34 @@
         "</button>",
         "</div>",
         "</article>"
+      ].join("");
+    }
+
+    function renderGiftImage(gift, hasLink) {
+      const image = '<img src="' + escapeAttribute(gift.image) + '" alt="' + escapeAttribute(gift.name) + '" loading="lazy">';
+
+      if (!hasLink) {
+        return image;
+      }
+
+      return [
+        '<a class="gift-media-link" href="',
+        escapeAttribute(gift.link),
+        '" target="_blank" rel="noopener noreferrer" aria-label="Ver produto: ',
+        escapeAttribute(gift.name),
+        '">',
+        image,
+        "</a>"
+      ].join("");
+    }
+
+    function renderProductLink(gift) {
+      return [
+        '<a class="product-link" href="',
+        escapeAttribute(gift.link),
+        '" target="_blank" rel="noopener noreferrer">',
+        "Ver produto",
+        "</a>"
       ].join("");
     }
 
