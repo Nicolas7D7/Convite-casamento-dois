@@ -102,6 +102,8 @@
 
     .top-actions {
       display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
       justify-content: flex-end;
       padding-bottom: 8px;
     }
@@ -525,6 +527,31 @@
       font-weight: 700;
     }
 
+    .footer-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 16px;
+    }
+
+    .admin-entry {
+      min-height: 38px;
+      padding: 0 15px;
+      border: 1px solid rgba(216, 180, 107, 0.32);
+      border-radius: 999px;
+      color: var(--gold-soft);
+      background: rgba(255, 248, 236, 0.03);
+      font-size: 0.9rem;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .admin-entry:hover,
+    .admin-entry:focus-visible {
+      border-color: var(--gold);
+      background: rgba(216, 180, 107, 0.1);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
     .modal {
       position: fixed;
       z-index: 20;
@@ -613,6 +640,7 @@
     }
 
     .field input,
+    .field select,
     .field textarea {
       width: 100%;
       border: 1px solid rgba(216, 180, 107, 0.34);
@@ -623,9 +651,18 @@
       transition: border-color 180ms ease, background 180ms ease;
     }
 
-    .field input {
+    .field input,
+    .field select {
       min-height: 48px;
       padding: 0 14px;
+    }
+
+    .field select {
+      appearance: none;
+      background-image: linear-gradient(45deg, transparent 50%, var(--gold-soft) 50%), linear-gradient(135deg, var(--gold-soft) 50%, transparent 50%);
+      background-position: calc(100% - 18px) 20px, calc(100% - 13px) 20px;
+      background-repeat: no-repeat;
+      background-size: 5px 5px, 5px 5px;
     }
 
     .field textarea {
@@ -636,6 +673,7 @@
     }
 
     .field input:focus,
+    .field select:focus,
     .field textarea:focus {
       border-color: var(--gold);
       background: rgba(255, 248, 236, 0.08);
@@ -724,6 +762,137 @@
       line-height: 1.65;
     }
 
+    .admin-panel {
+      width: min(100%, 900px);
+    }
+
+    .admin-layout {
+      display: grid;
+      gap: 22px;
+      margin-top: 22px;
+    }
+
+    .admin-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .admin-actions .primary-button,
+    .admin-actions .secondary-button,
+    .admin-actions .link-button {
+      min-height: 42px;
+      padding: 0 15px;
+      font-size: 0.92rem;
+    }
+
+    .admin-section {
+      display: grid;
+      gap: 16px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(216, 180, 107, 0.22);
+    }
+
+    .admin-section-title {
+      margin: 0;
+      color: var(--ivory);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(1.65rem, 6vw, 2.2rem);
+      font-weight: 600;
+      line-height: 1.05;
+    }
+
+    .admin-form-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .admin-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .admin-gift {
+      display: grid;
+      gap: 12px;
+      padding: 14px;
+      border: 1px solid rgba(216, 180, 107, 0.28);
+      border-radius: var(--radius);
+      background: rgba(255, 248, 236, 0.035);
+    }
+
+    .admin-gift-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .admin-gift-title {
+      margin: 0;
+      color: var(--ivory);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: 1.38rem;
+      font-weight: 600;
+    }
+
+    .admin-gift-meta,
+    .admin-gift-choice {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    .admin-pill {
+      display: inline-flex;
+      min-height: 26px;
+      align-items: center;
+      padding: 0 9px;
+      border: 1px solid rgba(216, 180, 107, 0.28);
+      border-radius: 999px;
+      color: var(--gold-soft);
+      background: rgba(255, 248, 236, 0.035);
+    }
+
+    .admin-row-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .admin-small-button {
+      min-height: 36px;
+      padding: 0 12px;
+      border: 1px solid rgba(216, 180, 107, 0.34);
+      border-radius: 999px;
+      color: var(--ivory);
+      background: rgba(255, 248, 236, 0.04);
+      font-size: 0.86rem;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .admin-small-button:hover,
+    .admin-small-button:focus-visible {
+      border-color: var(--gold);
+      background: rgba(216, 180, 107, 0.1);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    .admin-message {
+      padding: 12px 14px;
+      border: 1px solid rgba(216, 180, 107, 0.38);
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: rgba(255, 248, 236, 0.04);
+      line-height: 1.5;
+    }
+
     @media (min-width: 640px) {
       .page {
         padding: 42px 28px 28px;
@@ -750,6 +919,14 @@
 
       .modal-actions {
         grid-template-columns: 1fr 1fr;
+      }
+
+      .admin-form-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .admin-form-grid .field-wide {
+        grid-column: 1 / -1;
       }
     }
 
@@ -782,7 +959,8 @@
 <body>
   <main class="page">
     <div class="top-actions">
-      <a class="invite-link" id="inviteLink" href="https://SEU-LINK-DO-CONVITE-AQUI.vercel.app">Voltar ao convite</a>
+      <a class="invite-link" id="inviteLink" href="https://teste-casamento-nine.vercel.app/#presentes">Voltar ao convite</a>
+      <a class="invite-link" id="sheetLinkTop" href="COLE_AQUI_O_LINK_DA_PLANILHA_DE_PRESENTES" target="_blank" rel="noopener noreferrer">Abrir planilha</a>
     </div>
 
     <header class="hero">
@@ -808,6 +986,9 @@
     <footer class="footer">
       <strong>Nicolas &amp; Phamyla</strong>
       <span>31 · 10 · 2026</span>
+      <div class="footer-actions">
+        <button class="admin-entry" type="button" id="openAdmin">Área dos Noivos</button>
+      </div>
     </footer>
   </main>
 
@@ -861,8 +1042,119 @@
     </div>
   </div>
 
+  <div class="modal" id="adminModal" role="dialog" aria-modal="true" aria-labelledby="adminModalTitle" hidden>
+    <div class="modal-panel admin-panel">
+      <button class="modal-close" type="button" id="closeAdminModal" aria-label="Fechar">×</button>
+
+      <div class="modal-content" id="adminLoginView">
+        <p class="modal-eyebrow">Área dos Noivos</p>
+        <h2 class="modal-title" id="adminModalTitle">Entrar no painel</h2>
+        <p class="selected-gift">Use a senha dos noivos para adicionar e gerenciar presentes.</p>
+
+        <form id="adminLoginForm" novalidate>
+          <div class="field">
+            <label for="adminPassword">Senha</label>
+            <input id="adminPassword" name="adminPassword" type="password" autocomplete="current-password" required>
+          </div>
+
+          <div class="form-error" id="adminLoginError" hidden></div>
+
+          <div class="modal-actions">
+            <button class="primary-button" type="submit" id="adminLoginButton">Entrar</button>
+            <button class="secondary-button" type="button" id="cancelAdminLogin">Cancelar</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-content" id="adminPanelView" hidden>
+        <p class="modal-eyebrow">Área dos Noivos</p>
+        <h2 class="modal-title">Gerenciar presentes</h2>
+
+        <div class="admin-actions">
+          <button class="primary-button" type="button" id="showAddGift">Adicionar presente</button>
+          <button class="secondary-button" type="button" id="showManageGifts">Gerenciar presentes</button>
+          <button class="secondary-button" type="button" id="adminRefresh">Atualizar dados</button>
+          <a class="link-button" id="sheetLinkAdmin" href="COLE_AQUI_O_LINK_DA_PLANILHA_DE_PRESENTES" target="_blank" rel="noopener noreferrer">Abrir planilha</a>
+          <button class="secondary-button" type="button" id="adminLogout">Sair da área dos noivos</button>
+        </div>
+
+        <div class="admin-message" id="adminMessage" hidden></div>
+
+        <div class="admin-layout">
+          <section class="admin-section" id="adminFormSection">
+            <h3 class="admin-section-title" id="adminFormTitle">Adicionar presente</h3>
+
+            <form id="adminGiftForm" novalidate>
+              <input id="adminGiftId" name="id" type="hidden">
+
+              <div class="admin-form-grid">
+                <div class="field">
+                  <label for="adminGiftName">Nome</label>
+                  <input id="adminGiftName" name="name" type="text" maxlength="120" required>
+                </div>
+
+                <div class="field">
+                  <label for="adminGiftCategory">Categoria</label>
+                  <select id="adminGiftCategory" name="category" required>
+                    <option value="Cozinha">Cozinha</option>
+                    <option value="Quarto">Quarto</option>
+                    <option value="Banheiro">Banheiro</option>
+                    <option value="Decoração">Decoração</option>
+                    <option value="Eletro">Eletro</option>
+                    <option value="Outros">Outros</option>
+                  </select>
+                </div>
+
+                <div class="field">
+                  <label for="adminGiftValue">Valor</label>
+                  <input id="adminGiftValue" name="value" type="text" maxlength="60" placeholder="R$ 200,00">
+                </div>
+
+                <div class="field">
+                  <label for="adminGiftActive">Ativo</label>
+                  <select id="adminGiftActive" name="active">
+                    <option value="Sim">Sim</option>
+                    <option value="Não">Não</option>
+                  </select>
+                </div>
+
+                <div class="field field-wide">
+                  <label for="adminGiftLink">Link do produto</label>
+                  <input id="adminGiftLink" name="link" type="url" maxlength="500" placeholder="https://">
+                </div>
+
+                <div class="field field-wide">
+                  <label for="adminGiftImage">Link da imagem</label>
+                  <input id="adminGiftImage" name="image" type="url" maxlength="500" placeholder="https://">
+                </div>
+
+                <div class="field field-wide">
+                  <label for="adminGiftNote">Observação</label>
+                  <textarea id="adminGiftNote" name="note" maxlength="500"></textarea>
+                </div>
+              </div>
+
+              <div class="form-error" id="adminFormError" hidden></div>
+
+              <div class="modal-actions">
+                <button class="primary-button" type="submit" id="adminSaveGift">Salvar presente</button>
+                <button class="secondary-button" type="button" id="adminClearForm">Limpar formulário</button>
+              </div>
+            </form>
+          </section>
+
+          <section class="admin-section" id="adminManageSection" hidden>
+            <h3 class="admin-section-title">Presentes cadastrados</h3>
+            <div class="admin-list" id="adminGiftList"></div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     const CONVITE_URL = "https://teste-casamento-nine.vercel.app/#presentes";
+    const PLANILHA_URL = "COLE_AQUI_O_LINK_DA_PLANILHA_DE_PRESENTES";
 
     // Cole aqui a URL do Web App do Apps Script terminada em /exec.
     const GIFTS_ENDPOINT = "https://script.google.com/macros/s/AKfycbw1OakzhKEstcltDJZoSEda4CyLxZd1N5YzMvDfdx3OW2CJghSIGTsGsvX00iBwDXtK/exec";
@@ -871,6 +1163,7 @@
 
     const elements = {
       inviteLink: document.getElementById("inviteLink"),
+      sheetLinkTop: document.getElementById("sheetLinkTop"),
       filters: document.getElementById("filters"),
       refreshList: document.getElementById("refreshList"),
       state: document.getElementById("state"),
@@ -889,10 +1182,45 @@
       confirmButton: document.getElementById("confirmButton"),
       successText: document.getElementById("successText"),
       purchaseLink: document.getElementById("purchaseLink"),
-      backToList: document.getElementById("backToList")
+      backToList: document.getElementById("backToList"),
+      openAdmin: document.getElementById("openAdmin"),
+      adminModal: document.getElementById("adminModal"),
+      closeAdminModal: document.getElementById("closeAdminModal"),
+      cancelAdminLogin: document.getElementById("cancelAdminLogin"),
+      adminLoginView: document.getElementById("adminLoginView"),
+      adminPanelView: document.getElementById("adminPanelView"),
+      adminLoginForm: document.getElementById("adminLoginForm"),
+      adminPassword: document.getElementById("adminPassword"),
+      adminLoginError: document.getElementById("adminLoginError"),
+      adminLoginButton: document.getElementById("adminLoginButton"),
+      showAddGift: document.getElementById("showAddGift"),
+      showManageGifts: document.getElementById("showManageGifts"),
+      adminRefresh: document.getElementById("adminRefresh"),
+      sheetLinkAdmin: document.getElementById("sheetLinkAdmin"),
+      adminLogout: document.getElementById("adminLogout"),
+      adminMessage: document.getElementById("adminMessage"),
+      adminFormSection: document.getElementById("adminFormSection"),
+      adminManageSection: document.getElementById("adminManageSection"),
+      adminFormTitle: document.getElementById("adminFormTitle"),
+      adminGiftForm: document.getElementById("adminGiftForm"),
+      adminGiftId: document.getElementById("adminGiftId"),
+      adminGiftName: document.getElementById("adminGiftName"),
+      adminGiftCategory: document.getElementById("adminGiftCategory"),
+      adminGiftValue: document.getElementById("adminGiftValue"),
+      adminGiftActive: document.getElementById("adminGiftActive"),
+      adminGiftLink: document.getElementById("adminGiftLink"),
+      adminGiftImage: document.getElementById("adminGiftImage"),
+      adminGiftNote: document.getElementById("adminGiftNote"),
+      adminFormError: document.getElementById("adminFormError"),
+      adminSaveGift: document.getElementById("adminSaveGift"),
+      adminClearForm: document.getElementById("adminClearForm"),
+      adminGiftList: document.getElementById("adminGiftList")
     };
 
     let gifts = [];
+    let adminGifts = [];
+    let adminPasswordValue = "";
+    let editingGiftId = "";
     let currentFilter = "Todos";
     let selectedGift = null;
     let isLoading = false;
@@ -901,7 +1229,7 @@
     document.addEventListener("DOMContentLoaded", init);
 
     function init() {
-      elements.inviteLink.href = CONVITE_URL;
+      configureExternalLinks();
       renderFilters();
       bindEvents();
       loadGifts();
@@ -919,6 +1247,10 @@
       elements.refreshList.addEventListener("click", function () {
         loadGifts();
       });
+
+      elements.sheetLinkTop.addEventListener("click", handleSheetLinkClick);
+      elements.sheetLinkAdmin.addEventListener("click", handleSheetLinkClick);
+      elements.openAdmin.addEventListener("click", openAdminModal);
 
       elements.giftGrid.addEventListener("click", function (event) {
         const button = event.target.closest("[data-choose-id]");
@@ -941,13 +1273,40 @@
         }
       });
 
+      elements.closeAdminModal.addEventListener("click", closeAdminModal);
+      elements.cancelAdminLogin.addEventListener("click", closeAdminModal);
+      elements.adminModal.addEventListener("click", function (event) {
+        if (event.target === elements.adminModal) {
+          closeAdminModal();
+        }
+      });
+      elements.adminLoginForm.addEventListener("submit", submitAdminLogin);
+      elements.showAddGift.addEventListener("click", function () {
+        showAdminForm();
+      });
+      elements.showManageGifts.addEventListener("click", showAdminManage);
+      elements.adminRefresh.addEventListener("click", adminLoadGifts);
+      elements.adminLogout.addEventListener("click", logoutAdmin);
+      elements.adminGiftForm.addEventListener("submit", submitAdminGift);
+      elements.adminClearForm.addEventListener("click", resetAdminForm);
+      elements.adminGiftList.addEventListener("click", handleAdminGiftAction);
+
       document.addEventListener("keydown", function (event) {
         if (event.key === "Escape" && !elements.modal.hidden) {
           closeChoiceModal();
         }
+        if (event.key === "Escape" && !elements.adminModal.hidden) {
+          closeAdminModal();
+        }
       });
 
       elements.giftForm.addEventListener("submit", submitChoice);
+    }
+
+    function configureExternalLinks() {
+      elements.inviteLink.href = CONVITE_URL;
+      elements.sheetLinkTop.href = isPlaceholderUrl(PLANILHA_URL) ? "#" : PLANILHA_URL;
+      elements.sheetLinkAdmin.href = isPlaceholderUrl(PLANILHA_URL) ? "#" : PLANILHA_URL;
     }
 
     function renderFilters() {
@@ -1028,25 +1387,6 @@
       const available = isGiftAvailable(gift);
       const hasLink = Boolean(gift.link);
       const image = renderGiftMedia(gift, hasLink);
-      function renderGiftMedia(gift, hasLink) {
-  const media = gift.image
-    ? '<img src="' + escapeAttribute(gift.image) + '" alt="' + escapeAttribute(gift.name) + '" loading="lazy">'
-    : '<div class="gift-placeholder"><span>N&amp;P</span></div>';
-
-  if (!hasLink) {
-    return media;
-  }
-
-  return [
-    '<a class="gift-media-link" href="',
-    escapeAttribute(gift.link),
-    '" target="_blank" rel="noopener noreferrer" aria-label="Ver produto: ',
-    escapeAttribute(gift.name),
-    '">',
-    media,
-    "</a>"
-  ].join("");
-}
 
       return [
         '<article class="gift-card',
@@ -1085,11 +1425,13 @@
       ].join("");
     }
 
-    function renderGiftImage(gift, hasLink) {
-      const image = '<img src="' + escapeAttribute(gift.image) + '" alt="' + escapeAttribute(gift.name) + '" loading="lazy">';
+    function renderGiftMedia(gift, hasLink) {
+      const media = gift.image
+        ? '<img src="' + escapeAttribute(gift.image) + '" alt="' + escapeAttribute(gift.name) + '" loading="lazy">'
+        : '<div class="gift-placeholder"><span>N&amp;P</span></div>';
 
       if (!hasLink) {
-        return image;
+        return media;
       }
 
       return [
@@ -1098,7 +1440,7 @@
         '" target="_blank" rel="noopener noreferrer" aria-label="Ver produto: ',
         escapeAttribute(gift.name),
         '">',
-        image,
+        media,
         "</a>"
       ].join("");
     }
@@ -1146,6 +1488,384 @@
       document.body.classList.remove("modal-open");
       selectedGift = null;
       setSubmitting(false);
+    }
+
+    function openAdminModal() {
+      elements.adminModal.hidden = false;
+      document.body.classList.add("modal-open");
+      hideAdminMessage();
+
+      if (adminPasswordValue) {
+        showAdminPanel();
+        adminLoadGifts();
+      } else {
+        showAdminLogin();
+      }
+    }
+
+    function closeAdminModal() {
+      elements.adminModal.hidden = true;
+      if (elements.modal.hidden) {
+        document.body.classList.remove("modal-open");
+      }
+    }
+
+    function showAdminLogin() {
+      elements.adminLoginView.hidden = false;
+      elements.adminPanelView.hidden = true;
+      elements.adminLoginError.hidden = true;
+      elements.adminLoginError.textContent = "";
+      window.setTimeout(function () {
+        elements.adminPassword.focus();
+      }, 80);
+    }
+
+    function showAdminPanel() {
+      elements.adminLoginView.hidden = true;
+      elements.adminPanelView.hidden = false;
+      elements.adminPassword.value = "";
+      showAdminManage();
+    }
+
+    async function submitAdminLogin(event) {
+      event.preventDefault();
+
+      const password = elements.adminPassword.value.trim();
+      if (!password) {
+        showAdminLoginError("Informe a senha dos noivos.");
+        return;
+      }
+
+      setAdminLoginLoading(true);
+
+      try {
+        const response = await jsonpRequest({
+          action: "adminListGifts",
+          password: password
+        });
+
+        if (!response || !response.ok) {
+          throw new Error(response && response.error ? response.error : "Não foi possível entrar na área dos noivos.");
+        }
+
+        adminPasswordValue = password;
+        adminGifts = Array.isArray(response.gifts) ? response.gifts.map(normalizeAdminGift) : [];
+        showAdminPanel();
+        renderAdminGifts();
+        showAdminMessage("Área dos noivos carregada.");
+      } catch (error) {
+        showAdminLoginError(error.message || "Não foi possível entrar na área dos noivos.");
+      } finally {
+        setAdminLoginLoading(false);
+      }
+    }
+
+    function logoutAdmin() {
+      adminPasswordValue = "";
+      adminGifts = [];
+      editingGiftId = "";
+      resetAdminForm();
+      showAdminLogin();
+    }
+
+    async function adminLoadGifts() {
+      if (!adminPasswordValue) {
+        showAdminLogin();
+        return;
+      }
+
+      showAdminMessage("Atualizando dados...");
+
+      try {
+        const response = await adminRequest({ action: "adminListGifts" });
+        if (!response || !response.ok) {
+          throw new Error(response && response.error ? response.error : "Não foi possível carregar os presentes.");
+        }
+
+        adminGifts = Array.isArray(response.gifts) ? response.gifts.map(normalizeAdminGift) : [];
+        renderAdminGifts();
+        showAdminMessage("Dados atualizados.");
+      } catch (error) {
+        showAdminMessage(error.message || "Não foi possível carregar os presentes.", true);
+      }
+    }
+
+    function showAdminForm() {
+      resetAdminForm();
+      elements.adminFormSection.hidden = false;
+      elements.adminManageSection.hidden = true;
+      hideAdminMessage();
+      window.setTimeout(function () {
+        elements.adminGiftName.focus();
+      }, 80);
+    }
+
+    function showAdminManage() {
+      elements.adminFormSection.hidden = true;
+      elements.adminManageSection.hidden = false;
+      renderAdminGifts();
+    }
+
+    function resetAdminForm() {
+      editingGiftId = "";
+      elements.adminGiftForm.reset();
+      elements.adminGiftId.value = "";
+      elements.adminGiftCategory.value = "Cozinha";
+      elements.adminGiftActive.value = "Sim";
+      elements.adminFormTitle.textContent = "Adicionar presente";
+      elements.adminSaveGift.textContent = "Salvar presente";
+      elements.adminFormError.hidden = true;
+      elements.adminFormError.textContent = "";
+    }
+
+    async function submitAdminGift(event) {
+      event.preventDefault();
+
+      const data = getAdminFormData();
+      if (!data.name || !data.category) {
+        showAdminFormError("Nome e categoria são obrigatórios.");
+        return;
+      }
+
+      setAdminSaveLoading(true);
+
+      try {
+        const action = editingGiftId ? "adminUpdateGift" : "adminAddGift";
+        const response = await adminRequest(Object.assign({ action: action }, data));
+
+        if (!response || !response.ok) {
+          throw new Error(response && response.error ? response.error : "Não foi possível salvar o presente.");
+        }
+
+        showAdminMessage(response.message || "Presente salvo com sucesso.");
+        resetAdminForm();
+        await adminLoadGifts();
+        loadGifts();
+        showAdminManage();
+      } catch (error) {
+        showAdminFormError(error.message || "Não foi possível salvar o presente.");
+      } finally {
+        setAdminSaveLoading(false);
+      }
+    }
+
+    function getAdminFormData() {
+      return {
+        id: elements.adminGiftId.value.trim(),
+        name: elements.adminGiftName.value.trim(),
+        category: elements.adminGiftCategory.value.trim(),
+        value: elements.adminGiftValue.value.trim(),
+        link: elements.adminGiftLink.value.trim(),
+        image: elements.adminGiftImage.value.trim(),
+        note: elements.adminGiftNote.value.trim(),
+        active: elements.adminGiftActive.value.trim() || "Sim"
+      };
+    }
+
+    function handleAdminGiftAction(event) {
+      const button = event.target.closest("[data-admin-action]");
+      if (!button) return;
+
+      const action = button.dataset.adminAction;
+      const id = button.dataset.giftId;
+
+      if (action === "edit") {
+        const gift = adminGifts.find(function (item) {
+          return item.id === id;
+        });
+        if (gift) {
+          fillAdminForm(gift);
+        }
+        return;
+      }
+
+      if (action === "reset" && !window.confirm("Liberar este presente escolhido?")) {
+        return;
+      }
+
+      runAdminGiftAction(action, id);
+    }
+
+    async function runAdminGiftAction(action, id) {
+      const actionMap = {
+        deactivate: "adminDeactivateGift",
+        reactivate: "adminReactivateGift",
+        reset: "adminResetGiftChoice"
+      };
+
+      if (!actionMap[action] || !id) return;
+
+      showAdminMessage("Salvando alteração...");
+
+      try {
+        const response = await adminRequest({
+          action: actionMap[action],
+          id: id
+        });
+
+        if (!response || !response.ok) {
+          throw new Error(response && response.error ? response.error : "Não foi possível salvar a alteração.");
+        }
+
+        showAdminMessage(response.message || "Alteração salva com sucesso.");
+        await adminLoadGifts();
+        loadGifts();
+      } catch (error) {
+        showAdminMessage(error.message || "Não foi possível salvar a alteração.", true);
+      }
+    }
+
+    function fillAdminForm(gift) {
+      editingGiftId = gift.id;
+      elements.adminGiftId.value = gift.id;
+      elements.adminGiftName.value = gift.name;
+      setSelectValue(elements.adminGiftCategory, gift.category || "Outros");
+      elements.adminGiftValue.value = gift.value;
+      elements.adminGiftLink.value = gift.link;
+      elements.adminGiftImage.value = gift.image;
+      elements.adminGiftNote.value = gift.note;
+      setSelectValue(elements.adminGiftActive, gift.active || "Sim");
+      elements.adminFormTitle.textContent = "Editar presente " + gift.id;
+      elements.adminSaveGift.textContent = "Salvar alterações";
+      elements.adminFormError.hidden = true;
+      elements.adminFormSection.hidden = false;
+      elements.adminManageSection.hidden = true;
+      hideAdminMessage();
+      window.setTimeout(function () {
+        elements.adminGiftName.focus();
+      }, 80);
+    }
+
+    function setSelectValue(select, value) {
+      const option = Array.from(select.options).find(function (item) {
+        return normalizeText(item.value) === normalizeText(value);
+      });
+      select.value = option ? option.value : select.options[0].value;
+    }
+
+    function renderAdminGifts() {
+      if (!elements.adminGiftList) return;
+
+      if (!adminGifts.length) {
+        elements.adminGiftList.innerHTML = '<div class="admin-message">Nenhum presente cadastrado.</div>';
+        return;
+      }
+
+      elements.adminGiftList.innerHTML = adminGifts.map(function (gift) {
+        const isActive = normalizeText(gift.active) === "sim";
+        const isChosen = normalizeText(gift.status) === "escolhido";
+        const activeAction = isActive ? "deactivate" : "reactivate";
+        const activeLabel = isActive ? "Desativar" : "Reativar";
+        const choiceText = gift.chosenBy
+          ? "Escolhido por " + gift.chosenBy + (gift.whatsapp ? " · " + gift.whatsapp : "")
+          : "Ainda não escolhido";
+
+        return [
+          '<article class="admin-gift">',
+          '<div class="admin-gift-header">',
+          '<h4 class="admin-gift-title">',
+          escapeHtml(gift.name),
+          "</h4>",
+          '<span class="admin-pill">',
+          escapeHtml(gift.id),
+          "</span>",
+          "</div>",
+          '<div class="admin-gift-meta">',
+          '<span>Categoria: ',
+          escapeHtml(gift.category),
+          "</span>",
+          '<span>Status: ',
+          escapeHtml(gift.status),
+          "</span>",
+          '<span>Ativo: ',
+          escapeHtml(gift.active),
+          "</span>",
+          gift.value ? '<span>Valor: ' + escapeHtml(gift.value) + "</span>" : "",
+          "</div>",
+          '<div class="admin-gift-choice">',
+          escapeHtml(choiceText),
+          "</div>",
+          '<div class="admin-row-actions">',
+          '<button class="admin-small-button" type="button" data-admin-action="edit" data-gift-id="',
+          escapeAttribute(gift.id),
+          '">Editar</button>',
+          '<button class="admin-small-button" type="button" data-admin-action="',
+          activeAction,
+          '" data-gift-id="',
+          escapeAttribute(gift.id),
+          '">',
+          activeLabel,
+          "</button>",
+          isChosen ? '<button class="admin-small-button" type="button" data-admin-action="reset" data-gift-id="' + escapeAttribute(gift.id) + '">Liberar presente</button>' : "",
+          "</div>",
+          "</article>"
+        ].join("");
+      }).join("");
+    }
+
+    function adminRequest(params) {
+      return jsonpRequest(Object.assign({
+        password: adminPasswordValue
+      }, params));
+    }
+
+    function normalizeAdminGift(gift) {
+      const normalized = normalizeGift(gift);
+      normalized.active = gift && gift.active ? String(gift.active).trim() : "Sim";
+      normalized.chosenBy = gift && gift.chosenBy ? String(gift.chosenBy).trim() : "";
+      normalized.whatsapp = gift && gift.whatsapp ? String(gift.whatsapp).trim() : "";
+      normalized.message = gift && gift.message ? String(gift.message).trim() : "";
+      normalized.selectedAt = gift && gift.selectedAt ? String(gift.selectedAt).trim() : "";
+      normalized.createdAt = gift && gift.createdAt ? String(gift.createdAt).trim() : "";
+      return normalized;
+    }
+
+    function showAdminLoginError(message) {
+      elements.adminLoginError.textContent = message;
+      elements.adminLoginError.hidden = false;
+    }
+
+    function showAdminFormError(message) {
+      elements.adminFormError.textContent = message;
+      elements.adminFormError.hidden = false;
+    }
+
+    function showAdminMessage(message, isError) {
+      elements.adminMessage.textContent = message;
+      elements.adminMessage.hidden = false;
+      elements.adminMessage.style.borderColor = isError ? "rgba(243, 220, 169, 0.58)" : "rgba(216, 180, 107, 0.38)";
+    }
+
+    function hideAdminMessage() {
+      elements.adminMessage.hidden = true;
+      elements.adminMessage.textContent = "";
+    }
+
+    function setAdminLoginLoading(isSubmitting) {
+      elements.adminLoginButton.disabled = isSubmitting;
+      elements.adminLoginButton.textContent = isSubmitting ? "Entrando..." : "Entrar";
+    }
+
+    function setAdminSaveLoading(isSubmitting) {
+      elements.adminSaveGift.disabled = isSubmitting;
+      elements.adminSaveGift.textContent = isSubmitting ? "Salvando..." : (editingGiftId ? "Salvar alterações" : "Salvar presente");
+    }
+
+    function handleSheetLinkClick(event) {
+      if (!isPlaceholderUrl(PLANILHA_URL)) {
+        return;
+      }
+
+      event.preventDefault();
+      if (!elements.adminModal.hidden && !elements.adminPanelView.hidden) {
+        showAdminMessage("Cole o link da planilha na constante PLANILHA_URL.");
+      } else {
+        window.alert("Cole o link da planilha na constante PLANILHA_URL.");
+      }
+    }
+
+    function isPlaceholderUrl(url) {
+      return !url || url.indexOf("COLE_AQUI") !== -1;
     }
 
     async function submitChoice(event) {
