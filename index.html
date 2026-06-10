@@ -1027,9 +1027,26 @@
     function renderGiftCard(gift) {
       const available = isGiftAvailable(gift);
       const hasLink = Boolean(gift.link);
-      const image = gift.image
-        ? renderGiftImage(gift, hasLink)
-        : '<div class="gift-placeholder"><span>N&amp;P</span></div>';
+      const image = renderGiftMedia(gift, hasLink);
+      function renderGiftMedia(gift, hasLink) {
+  const media = gift.image
+    ? '<img src="' + escapeAttribute(gift.image) + '" alt="' + escapeAttribute(gift.name) + '" loading="lazy">'
+    : '<div class="gift-placeholder"><span>N&amp;P</span></div>';
+
+  if (!hasLink) {
+    return media;
+  }
+
+  return [
+    '<a class="gift-media-link" href="',
+    escapeAttribute(gift.link),
+    '" target="_blank" rel="noopener noreferrer" aria-label="Ver produto: ',
+    escapeAttribute(gift.name),
+    '">',
+    media,
+    "</a>"
+  ].join("");
+}
 
       return [
         '<article class="gift-card',
